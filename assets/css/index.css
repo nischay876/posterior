@@ -1,0 +1,147 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #333333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 600px;
+    padding: 20px;
+    background-color: #1f1f1f;
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+    position: relative;
+}
+
+h1 {
+    color: #ffffff;
+    font-size: 24px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+p {
+    color: #cccccc;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+a {
+    color: #ffffff;
+    background-color: #555555;
+    padding: 10px 15px;
+    text-decoration: none;
+    border-radius: 5px;
+    display: inline-block;
+}
+
+a:hover {
+    background-color: #777777;
+}
+
+pre {
+    background-color: #222222;
+    padding: 20px;
+    border: 1px solid #555555;
+    border-radius: 5px;
+    font-size: 14px;
+    line-height: 1.5;
+    overflow: auto;
+    position: relative;
+    color: #ffffff; /* Added text color */
+}
+
+.code-container {
+    background-color: #222222;
+    padding: 0px;
+    border: 0px solid #555555;
+    border-radius: 0px;
+    font-size: 0px;
+    line-height: 0;
+    position: relative;
+    color: #ffffff; /* Added text color */
+}
+
+.copy-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 5px 10px;
+    background-color: #555555;
+    color: #ffffff;
+    border: none;
+    border-radius: 3px;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.logout-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 5px 10px;
+    background-color: #ffffff;
+    color: #333333;
+    border: none;
+    border-radius: 3px;
+    font-size: 12px;
+    text-decoration: none;
+}
+
+.download-button {
+    display: block;
+    margin-top: 20px;
+    text-align: center;
+}
+
+.upload-form {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.upload-form input[type="file"] {
+    display: none;
+}
+
+.upload-button {
+    color: #ffffff;
+    background-color: #555555;
+    padding: 10px 278px;
+    margin-top: 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    display: block;
+}
+.error-message {
+display: inline-block;
+padding: 10px;
+border: 1px solid #333333;
+border-radius: 5px;
+background-color: #1f1f1f;
+color: red;
+font-size: 14px;
+margin: 10px auto;
+text-align: center;
+}
+
+
+.upload-button:hover {
+    background-color: #777777;
+}
+pre code,
+h3 {
+    color: #ffffff;
+}
+.selected-file {
+    margin-top: 20px;
+    color: #ffffff;
+}
+
+.selected-file span {
+    font-weight: bold;
+}

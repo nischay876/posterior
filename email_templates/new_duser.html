@@ -1,0 +1,128 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta name="viewport" content="width=device-width" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Welcome to IMG3</title>
+    <style media="all" type="text/css">
+      @font-face {
+        font-family: "Asap";
+        font-style: normal;
+        src: url("https://global-assets.s3.fr-par.scw.cloud/fonts/asap/Asap-Regular.woff2")
+            format("woff2"),
+          url("https://global-assets.s3.fr-par.scw.cloud/fonts/asap/Asap-Regular.woff")
+            format("woff"),
+          url("https://global-assets.s3.fr-par.scw.cloud/fonts/asap/Asap-Regular.ttf")
+            format("truetype");
+        font-weight: 400;
+        font-display: swap;
+      }
+      @font-face {
+        font-family: "Asap";
+        font-style: normal;
+        src: url("https://global-assets.s3.fr-par.scw.cloud/fonts/asap/Asap-Medium.woff2")
+            format("woff2"),
+          url("https://global-assets.s3.fr-par.scw.cloud/fonts/asap/Asap-Medium.woff")
+            format("woff"),
+          url("https://global-assets.s3.fr-par.scw.cloud/fonts/asap/Asap-Medium.ttf")
+            format("truetype");
+        font-weight: 500;
+        font-display: swap;
+      }
+      @font-face {
+        font-family: "Asap";
+        font-style: normal;
+        src: url("https://global-assets.s3.fr-par.scw.cloud/fonts/asap/Asap-Bold.woff2")
+            format("woff2"),
+          url("https://global-assets.s3.fr-par.scw.cloud/fonts/asap/Asap-Bold.woff")
+            format("woff"),
+          url("https://global-assets.s3.fr-par.scw.cloud/fonts/asap/Asap-Bold.ttf")
+            format("truetype");
+        font-weight: 700;
+        font-display: swap;
+      }
+
+      body {
+        font-family: Asap;
+        margin: 0;
+        font-size: 16px;
+        height: 100% !important;
+        line-height: 1.6em;
+        -webkit-font-smoothing: antialiased;
+        padding: 0;
+        -ms-text-size-adjust: 100%;
+        -webkit-text-size-adjust: 100%;
+        width: 100% !important;
+      }
+
+      .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+      }
+
+      .content {
+        max-width: 600px;
+        padding: 10px;
+        text-align: center;
+      }
+
+      .button {
+        display: inline-block;
+        padding: 12px 24px;
+        background-color: #4caf50;
+        color: #ffffff;
+        text-decoration: none;
+        border: none;
+        border-radius: 5px;
+        font-family: "Asap", sans-serif;
+        font-size: 16px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      .button:hover {
+        background-color: #45a049;
+      }
+
+      .button:active {
+        background-color: #3d8e41;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="content">
+        <h1>Welcome to IMG3</h1>
+        <p>Hello, {email}</p>
+        <p>
+          Thank you for registering with IMG3 via Discord. We are excited to
+          have you on board!
+        </p>
+        <p>
+          To get started, please click the button below to login your account:
+        </p>
+        <a href="{login_link}" class="button">Login</a>
+        <p>Auto generated Password: {password}</p>
+        <p>
+          If you did not sign up for an account, you can safely ignore this
+          email.
+        </p>
+        <hr />
+        <p>
+          If you have any questions or need assistance, please feel free to join
+          our Discord server <a href="{discord_link}">discord.gg</a>.
+        </p>
+        <p>
+          Visit our website at
+          <a href="https://www.img3.eu.org">www.img3.eu.org</a> to learn more
+          about our services.
+        </p>
+        <p>
+          Thank you again for choosing IMG3. We look forward to serving you!
+        </p>
+      </div>
+    </div>
+  </body>
+</html>
