@@ -5,7 +5,7 @@ $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
 $dotenv->load();
 
 session_start();
-$stmt = $conn->prepare('SELECT * FROM users WHERE id = :user_id');
+$stmt = $conn->prepare('SELECT * FROM tusers WHERE id = :user_id');
 $stmt->bindParam(':user_id', $_SESSION['user_id']);
 $stmt->execute();
 
@@ -23,18 +23,18 @@ $stmt->execute();
 //    exit;     
 //}
 
-// Fetch suspended users
+// Fetch suspended tusers
 
-// Fetch suspended users
+// Fetch suspended tusers
 $currentPage = isset($_GET['page']) ? $_GET['page'] : 1;
 $itemsPerPage = 50;
 $offset = ($currentPage - 1) * $itemsPerPage;
 
-$check_query = "SELECT * FROM users ORDER BY id ASC LIMIT $itemsPerPage OFFSET $offset";
+$check_query = "SELECT * FROM tusers ORDER BY id ASC LIMIT $itemsPerPage OFFSET $offset";
 $check_stmt = $conn->prepare($check_query);
 $check_stmt->execute();
 
-//$check_query = "SELECT * FROM users ORDER BY timestamp ASC";
+//$check_query = "SELECT * FROM tusers ORDER BY timestamp ASC";
 //$check_stmt = $conn->prepare($check_query);
 //$check_stmt->execute();
 $results = $check_stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -236,7 +236,7 @@ $results = $check_stmt->fetchAll(PDO::FETCH_ASSOC);
                             echo '</tr>';
                         }
                     } else {
-                        echo '<tr><td colspan="12" class="px-4 py-2">No suspended users found.</td></tr>';
+                        echo '<tr><td colspan="12" class="px-4 py-2">No suspended tusers found.</td></tr>';
                     }
                     ?>
                 </tbody>
@@ -273,7 +273,7 @@ $results = $check_stmt->fetchAll(PDO::FETCH_ASSOC);
 
 <?php
 // Get the total number of records from the database
-$count_query = "SELECT COUNT(*) as total FROM users";
+$count_query = "SELECT COUNT(*) as total FROM tusers";
 $count_stmt = $conn->prepare($count_query);
 $count_stmt->execute();
 $totalRecords = $count_stmt->fetch(PDO::FETCH_ASSOC)['total'];
@@ -347,14 +347,14 @@ if (isset($_POST['id']) && isset($_POST['value']) && isset($_POST['column'])) {
     $column = $_POST['column'];
 
     // Check if the user exists in the database
-    $check_query = "SELECT * FROM users WHERE id = :id";
+    $check_query = "SELECT * FROM tusers WHERE id = :id";
     $check_stmt = $conn->prepare($check_query);
     $check_stmt->bindParam(':id', $id);
     $check_stmt->execute();
 
     if ($check_stmt->rowCount() === 1) {
         // Store the value in the database
-        $update_query = "UPDATE users SET $column = :value WHERE id = :id";
+        $update_query = "UPDATE tusers SET $column = :value WHERE id = :id";
         $update_stmt = $conn->prepare($update_query);
         $update_stmt->bindParam(':value', $value);
         $update_stmt->bindParam(':id', $id);

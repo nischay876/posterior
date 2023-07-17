@@ -205,119 +205,10 @@ if ($stmt->rowCount() === 1) {
     }
     ?>
 
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Welcome</title>
-    <link href=/assets/css/index.css rel=stylesheet>
-    <script>
-        function copyCode() {
-            var code = document.getElementById("code").textContent;
-            navigator.clipboard.writeText(code)
-                .then(function() {
-                    alert("Code copied to clipboard!");
-                })
-                .catch(function() {
-                    alert("Failed to copy code to clipboard!");
-                });
-        }
-    </script>
-</head>
-<body>
-    <div class="container">
-        <h1>Welcome!</h1>
-        <?php
-        if (isset($_COOKIE['error'])) {
-            echo '<center><div style="word-break: break-word;" class="error-message">' . $_COOKIE['error'] . '</div></center>';
-            setcookie('error', '', time() - 3600); // Clear the error cookie
-        }
-        ?>
-        <p>You are logged in as <b><?php echo $email . ', ' . $username; ?></b></p>
-        <p>API key: <b><?php echo $api_key; ?></b></p>
-        <p>User ID: <b><?php echo $userr_id; ?></b></p>
-        <p>Total Files: <b><?php echo $totalRows; ?></b></p>
-        <?php
-        // Convert the total size to MB, KB, or GB
-        if ($totalSize < 1000) { // Size less than 1 KB
-            $totalSizeFormatted = number_format($totalSize, 2);
-            echo "<p>Total Files: <b>" . $totalSizeFormatted . " bytes</b></p>";
-        } elseif ($totalSize < 1000000) { // Size less than 1 MB
-            $totalSizeKB = number_format($totalSize / 1000, 2);
-            echo "<p>Total Files: <b>" . $totalSizeKB . " KB</b></p>";
-        } else { // Size greater than or equal to 1 MB
-            if ($totalSize < 1000000000) { // Size less than 1 GB
-                $totalSizeMB = number_format($totalSize / 1000000, 2);
-                echo "<p>Total Files: <b>" . $totalSizeMB . " MB</b></p>";
-            } else { // Size greater than or equal to 1 GB
-                $totalSizeGB = number_format($totalSize / 1000000000, 2);
-                echo "<p>Total Files: <b>" . $totalSizeGB . " GB</b></p>";
-            }
-        }
-        ?>
-        <p>User Created: <b><?php echo date('m/d/Y', $user['timestamp']); ?></b></p>
-        <a href="logout" class="logout-button">Logout</a>
-
-        <h3>Upload a File:</h3>
-        <form action="/" method="POST" enctype="multipart/form-data" class="upload-form">
-    <label for="fileInput" class="upload-button">Upload File</label>
-    <input type="file" name="file" id="fileInput" required onchange="submitForm()">
-</form>
-
-<script>
-function submitForm() {
-    document.getElementsByClassName('upload-form')[0].submit();
-}
-
-function showSelectedFile() {
-    var fileInput = document.getElementById('fileInput');
-    var fileNameSpan = document.getElementById('fileName');
-    fileNameSpan.textContent = fileInput.files[0].name;
-}
-</script>
-
-        <a href="/fm/images" class="download-button">Manage Images</a>
-        <a href="/fm/videos" class="download-button">Manage Videos</a>
-        <a href="/dl?key=<?php echo $api_key; ?>" class="download-button">Download ShareX Config File</a>
-                <h3>ShareX Config Code:</h3>
-                <div class="code-container">
-<pre id="code">{
-  "Version": "14.0.1",
-  "DestinationType": "ImageUploader, TextUploader, FileUploader",
-  "RequestMethod": "POST",
-  "RequestURL": "<?php echo $_ENV['ASS_DOMAIN']; ?>",
-  "Headers": {
-    "Authorization": "<?php echo $api_key; ?>",
-    "X-OG-Title": null,
-    "X-OG-Description": null,
-    "X-Webhook-Url": null,
-    "X-OG-Author": null,
-    "X-OG-Author-Url": null,
-    "X-OG-Provider": null,
-    "X-OG-Provider-Url": null,
-    "X-OG-Color": "#2f3136",
-    "X-Domain": "<?php echo str_replace("https://", "", $_ENV['ASS_DOMAIN']); ?>"
-  },
-  "Body": "MultipartFormData",
-  "FileFormName": "file",
-  "URL": "{json:.resource}",
-  "ThumbnailURL": "{json:.thumbnail}",
-  "DeletionURL": "{json:.delete}",
-  "ErrorMessage": "{response}"
-}</pre><button class="copy-button" onclick="copyCode()">Copy</button>
-</div>
-</body>
-</html>
     <?php
-} else {
-    echo 'Error fetching user details. try logging in again';
-    echo '<a href="/logout">logout</a>';
-}
-?>
-
-<?php
-if ($_ENV['DONATION'] === 'true') {
-    // Perform the desired action here
-    ?>
+    if ($_ENV['DONATION'] === 'true') {
+        // Perform the desired action here
+        ?>
 <style>
   .discord-icon {
     position: fixed;
@@ -433,7 +324,7 @@ if ($_ENV['DONATION'] === 'true') {
     <button class="close-btn" onclick="closeModal()">&times;</button>
     <h2>Make a Donation</h2>
     <p>Choose an amount:</p>
-    <form class="donation-form" onsubmit="submitForm(event)">
+    <form class="donation-form" onsubmit="submitForm(event2)">
       <div class="donation-option">
         <label>
           <input type="radio" name="donation-amount" value="3" checked />
@@ -492,8 +383,8 @@ if ($_ENV['DONATION'] === 'true') {
     modalOverlay.style.display = "none";
   }
 
-  function submitForm(event) {
-    event.preventDefault();
+  function submitForm(event2) {
+    event2.preventDefault();
     var donationAmount = document.querySelector(
       'input[name="donation-amount"]:checked'
     ).value;
@@ -519,6 +410,115 @@ if ($_ENV['DONATION'] === 'true') {
     width="50"
   />
 </a>
-<?php
+        <?php
+    }
+    ?>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Welcome</title>
+    <link href=/assets/css/index.css rel=stylesheet>
+    <script>
+        function copyCode() {
+            var code = document.getElementById("code").textContent;
+            navigator.clipboard.writeText(code)
+                .then(function() {
+                    alert("Code copied to clipboard!");
+                })
+                .catch(function() {
+                    alert("Failed to copy code to clipboard!");
+                });
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome!</h1>
+        <?php
+        if (isset($_COOKIE['error'])) {
+            echo '<center><div style="word-break: break-word;" class="error-message">' . $_COOKIE['error'] . '</div></center>';
+            setcookie('error', '', time() - 3600); // Clear the error cookie
+        }
+        ?>
+        <p>You are logged in as <b><?php echo $email . ', ' . $username; ?></b></p>
+        <p>API key: <b><?php echo $api_key; ?></b></p>
+        <p>User ID: <b><?php echo $userr_id; ?></b></p>
+        <p>Total Files: <b><?php echo $totalRows; ?></b></p>
+        <?php
+        // Convert the total size to MB, KB, or GB
+        if ($totalSize < 1000) { // Size less than 1 KB
+            $totalSizeFormatted = number_format($totalSize, 2);
+            echo "<p>Total Files: <b>" . $totalSizeFormatted . " bytes</b></p>";
+        } elseif ($totalSize < 1000000) { // Size less than 1 MB
+            $totalSizeKB = number_format($totalSize / 1000, 2);
+            echo "<p>Total Files: <b>" . $totalSizeKB . " KB</b></p>";
+        } else { // Size greater than or equal to 1 MB
+            if ($totalSize < 1000000000) { // Size less than 1 GB
+                $totalSizeMB = number_format($totalSize / 1000000, 2);
+                echo "<p>Total Files: <b>" . $totalSizeMB . " MB</b></p>";
+            } else { // Size greater than or equal to 1 GB
+                $totalSizeGB = number_format($totalSize / 1000000000, 2);
+                echo "<p>Total Files: <b>" . $totalSizeGB . " GB</b></p>";
+            }
+        }
+        ?>
+        <p>User Created: <b><?php echo date('m/d/Y', $user['timestamp']); ?></b></p>
+        <a href="logout" class="logout-button">Logout</a>
+
+        <h3>Upload a File:</h3>
+        <form action="/" method="POST" enctype="multipart/form-data" class="upload-form">
+    <label for="fileInput" class="upload-button">Upload File</label>
+    <input type="file" name="file" id="fileInput" required onchange="submitForm()">
+</form>
+
+<script>
+function submitForm() {
+    document.getElementsByClassName('upload-form')[0].submit();
+}
+
+function showSelectedFile() {
+    var fileInput = document.getElementById('fileInput');
+    var fileNameSpan = document.getElementById('fileName');
+    fileNameSpan.textContent = fileInput.files[0].name;
+}
+</script>
+
+        <a href="/fm/images" class="download-button">Manage Images</a>
+        <a href="/fm/videos" class="download-button">Manage Videos</a>
+        <a href="/dl?key=<?php echo $api_key; ?>" class="download-button">Download ShareX Config File</a>
+                <h3>ShareX Config Code:</h3>
+                <div class="code-container">
+<pre id="code">{
+  "Version": "14.0.1",
+  "DestinationType": "ImageUploader, TextUploader, FileUploader",
+  "RequestMethod": "POST",
+  "RequestURL": "<?php echo $_ENV['ASS_DOMAIN']; ?>",
+  "Headers": {
+    "Authorization": "<?php echo $api_key; ?>",
+    "X-OG-Title": null,
+    "X-OG-Description": null,
+    "X-Webhook-Url": null,
+    "X-OG-Author": null,
+    "X-OG-Author-Url": null,
+    "X-OG-Provider": null,
+    "X-OG-Provider-Url": null,
+    "X-OG-Color": "#2f3136",
+    "X-Domain": "<?php echo str_replace("https://", "", $_ENV['ASS_DOMAIN']); ?>"
+  },
+  "Body": "MultipartFormData",
+  "FileFormName": "file",
+  "URL": "{json:.resource}",
+  "ThumbnailURL": "{json:.thumbnail}",
+  "DeletionURL": "{json:.delete}",
+  "ErrorMessage": "{response}"
+}</pre><button class="copy-button" onclick="copyCode()">Copy</button>
+</div>
+</body>
+</html>
+    <?php
+} else {
+    echo 'Error fetching user details. try logging in again';
+    echo '<a href="/logout">logout</a>';
 }
 ?>

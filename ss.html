@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    .tooltip {
+      position: relative;
+      display: inline-block;
+      cursor: help;
+    }
+
+    .tooltip .tooltiptext {
+      visibility: hidden;
+      width: 150px;
+      background-color: #000;
+      color: #fff;
+      text-align: center;
+      border-radius: 6px;
+      padding: 5px;
+      position: absolute;
+      z-index: 1;
+      bottom: 125%;
+      left: 50%;
+      margin-left: -75px;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .tooltip:hover .tooltiptext {
+      visibility: visible;
+      opacity: 1;
+    }
+
+    .tooltip::after {
+      content: "?";
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      line-height: 20px;
+      text-align: center;
+      border-radius: 50%;
+      background-color: #000;
+      color: #fff;
+      position: absolute;
+      bottom: 0;
+      right: -10px;
+    }
+  </style>
+</head>
+<body>
+</br>
+</br>
+    <h1>0</h1>
+</br>
+</br>
+</br>
+</br>
+  <div class="tooltip">
+</br>
+</br>
+</br>
+
+    Some text<span class="tooltiptext">Description goes here</span>
+  </div>
+</body>
+</html>
