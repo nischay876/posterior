@@ -26,7 +26,7 @@ This README provides an overview and instructions for a frontend web application
 
 To get started with the web app, follow these instructions:
 
-1. Clone the repository: `git clone https://github.com/nischay876/posterior.git` or `wget https://github.com/nischay876/releases/latest/download/posterior.zip && unzip posterior.zip`
+1. Clone the repository: `git clone https://github.com/nischay876/posterior.git` or `wget https://github.com/nischay876/posterior/releases/latest/download/posterior.zip && unzip posterior.zip`
 2. Install the necessary dependencies by running `composer install`.
 3. Configure environment variables using `.env` file (see [Setup](#setup) section).
 4. Run a local web server or deploy the app to a web hosting service.
