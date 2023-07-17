@@ -8,7 +8,7 @@
 
 <body>
 <div class="homepage-button">
-    <a href="logout.php">Logout</a>
+    <a href="/logout.php">Logout</a>
     <a href="/">Homepage</a>
     <a href="images.php">View Images</a>
     <a href="<?php echo $_SERVER['PHP_SELF']; ?>" class="refresh-button">Refresh</a>
