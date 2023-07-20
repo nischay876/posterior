@@ -47,21 +47,20 @@ To configure the web app, perform the following steps:
 3. Update the database credentials, Discord OAuth settings, Cloudflare Turnstile configuration, and any other relevant variables.
 4. Create Table In database
 ```sql
-CREATE TABLE "users" (
-    "id" INTEGER NOT NULL DEFAULT nextval('users_id_seq'::regclass),
-    "userr_id" VARCHAR(50) NULL DEFAULT NULL,
-    "username" VARCHAR(255) NOT NULL,
-    "email" VARCHAR(255) NOT NULL,
-    "apikey" VARCHAR(255) NOT NULL DEFAULT '',
-    "password" VARCHAR(255) NOT NULL,
-    "verification_code" VARCHAR(255) NULL DEFAULT 'NULL::character varying',
-    "timestamp" VARCHAR(255) NOT NULL,
-    "is_verified" BOOLEAN NULL DEFAULT false,
-    "reset_code" VARCHAR(50) NULL DEFAULT NULL,
-    "magiccode" VARCHAR(50) NULL DEFAULT NULL,
-    "suspended" BOOLEAN NULL DEFAULT false,
-    PRIMARY KEY ("id")
-):
+CREATE TABLE users (
+    id SERIAL PRIMARY KEY,
+    userr_id VARCHAR(50),
+    username VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    apikey VARCHAR(255) NOT NULL DEFAULT '',
+    password VARCHAR(255) NOT NULL,
+    verification_code VARCHAR(255) DEFAULT NULL,
+    timestamp VARCHAR(255) NOT NULL,
+    is_verified BOOLEAN DEFAULT false,
+    reset_code VARCHAR(50),
+    magiccode VARCHAR(50),
+    suspended BOOLEAN DEFAULT false
+);
 ```
 5. Create a Col
 
