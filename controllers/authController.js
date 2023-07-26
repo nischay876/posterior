@@ -36,8 +36,8 @@ exports.dashboard = async (req, res) => {
 exports.discordLoginCallback = (req, res) => {
     // The user is authenticated through Discord OAuth at this point
     // Redirect the user to the dashboard after successful authentication
-    console.log('Discord login successful');
-    console.log('User data:', req.user);
+    console.log('Discord login successful', req.user.email);
+    //console.log('User data:', req.user);
     res.redirect('/dashboard');
 };
 
