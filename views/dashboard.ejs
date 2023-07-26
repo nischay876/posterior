@@ -1,0 +1,172 @@
+<!-- dashboard.ejs -->
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Browse Images</title>
+  <link href="/assets/css/fm.css" rel="stylesheet">
+</head>
+
+<body>
+  <h1 class='centeraline'>Welcome to your Dashboard</h1>
+  <p class='centeraline'>Email: <%= user.email %></p>
+  <p class='centeraline' ><a href="/logout">Logout</a></p>
+
+  <div class="gallery">
+    <% images.forEach(image=> { %>
+      <div class="image-container">
+        <img src="<%= ass_domain %>/<%= image.id %>/thumbnail" data-modal-src="<%= ass_domain %>/<%= image.id %>.png"
+          alt="<%= image.data.originalname %>">
+        <div class="button-container">
+          <button class="view-button">👀</button>
+          <button class="delete-button"><a
+              onclick="confirmDelete('<%= image.id %>', '<%= image.data.deleteId %>')">🗑️</a></button>
+          <button class="info-button" data-info='<%= JSON.stringify(image.data) %>'>📖</button>
+          <button><a target="_blank" href="<%= ass_domain %>/<%= image.id %>">↗️</a></button>
+        </div>
+      </div>
+      <% }) %>
+  </div>
+
+  <div class="modal">
+    <div class="modal-content">
+      <button class="modal-close">&times;</button>
+      <button class="modal-prev-button"><i class="fas fa-chevron-left">
+          << /i></button>
+      <img class="modal-image" src="" alt="Modal Image">
+      <button class="modal-next-button"><i class="fas fa-chevron-right">></i></button>
+    </div>
+  </div>
+
+  <script>
+
+    var modalPrevButton = document.querySelector('.modal-prev-button');
+    var modalNextButton = document.querySelector('.modal-next-button');
+    var imageContainers = document.querySelectorAll('.image-container');
+    var modalIndex = 0;
+
+    function handlePrev() {
+      modalIndex = (modalIndex - 1 + imageContainers.length) % imageContainers.length;
+      updateModalImage();
+    }
+
+    function handleNext() {
+      modalIndex = (modalIndex + 1) % imageContainers.length;
+      updateModalImage();
+    }
+
+    function updateModalImage() {
+      var imageSrc = imageContainers[modalIndex].querySelector('img').getAttribute('data-modal-src');
+      modalImage.src = imageSrc;
+    }
+
+    modalPrevButton.addEventListener('click', handlePrev);
+    modalNextButton.addEventListener('click', handleNext);
+
+    // JavaScript code for handling button actions (e.g., delete and view)
+    var viewButtons = document.querySelectorAll('.view-button');
+    var deleteButtons = document.querySelectorAll('.delete-button');
+    var modal = document.querySelector('.modal');
+    var modalImage = document.querySelector('.modal-image');
+    var modalCloseButton = document.querySelector('.modal-close');
+
+    function handleView(event) {
+      var imageSrc = event.target.parentNode.parentNode.querySelector('img').getAttribute('data-modal-src');
+      modalImage.src = imageSrc;
+      modal.classList.add('open');
+    }
+
+    var infoButtons = document.querySelectorAll('.info-button');
+
+    function handleInfo(event) {
+      var imageData = JSON.parse(event.target.getAttribute('data-info'));
+      var info = "Image Information:\n\n";
+      info += "Name: " + imageData.originalname + "\n";
+      if (imageData.size >= 1024 * 1024) {
+        info += "Size: " + Math.floor(imageData.size / (1024 * 1024)) + " MB\n";
+      } else {
+        info += "Size: " + Math.floor(imageData.size / 1024) + " KB\n";
+      }
+      info += "Type: " + imageData.mimetype + "\n";
+      info += "Uploaded by: " + imageData.uploader + "\n";
+      info += "Upload Date: " + new Date(imageData.timestamp).toLocaleString() + "\n";
+      info += "SHA1: " + imageData.sha1 + "\n";
+
+      alert(info);
+    }
+
+    infoButtons.forEach(function (button) {
+      button.addEventListener('click', handleInfo);
+    });
+
+    function handleCloseModal() {
+      modal.classList.remove('open');
+      modalImage.src = '';
+    }
+
+    viewButtons.forEach(function (button) {
+      button.addEventListener('click', handleView);
+    });
+
+    modalCloseButton.addEventListener('click', handleCloseModal);
+
+    // Define the sortImages function
+    function sortImages(sortType) {
+      var gallery = document.querySelector('.gallery');
+      var images = Array.from(gallery.getElementsByClassName('image-container'));
+
+      // Sorting logic here...
+    }
+
+    // Define the updateSortType function
+    function updateSortType(sortType) {
+      document.cookie = "sortType=" + sortType + "; path=/";
+      sortImages(sortType);
+      setTimeout(function () {
+        window.location.reload();
+      }, 500);
+    }
+
+    // Retrieve and apply the stored sort type on page load
+    window.addEventListener('DOMContentLoaded', function () {
+      var storedSortType = getCookie("sortType");
+      if (storedSortType !== "") {
+        document.getElementById("sort-dropdown").value = storedSortType;
+        sortImages(storedSortType);
+      }
+    });
+
+    // Function to retrieve the cookie value
+    function getCookie(name) {
+      var cookies = document.cookie.split(';');
+      for (var i = 0; i < cookies.length; i++) {
+        var cookie = cookies[i].trim();
+        if (cookie.indexOf(name) === 0) {
+          return cookie.substring(name.length + 1);
+        }
+      }
+      return "";
+    }
+
+    //////
+
+    function confirmDelete(id, deleteId) {
+      if (confirm("Are you sure you want to delete?")) {
+        // User confirmed, perform the GET request
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status === 200) {
+              // Request successful, refresh the page
+              location.reload();
+            }
+          }
+        };
+        xhr.open("GET", '<%= ass_domain %>/' + id + "/delete/" + deleteId + '/confirm', true);
+        xhr.send();
+      }
+    }
+  </script>
+</body>
+
+</html>
