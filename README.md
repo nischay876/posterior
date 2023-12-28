@@ -2,7 +2,7 @@
 
 To configure the web app, perform the following steps:
 
-1. Rename the `.env.example` file to `.env`.
+1. Rename the `config.example.js` file to `config.js`.
 2. Open the `.env` file and update the necessary variables with your configuration.
 3. Update the database credentials, Discord OAuth settings, Cloudflare Turnstile configuration, and any other relevant variables.
 4. Create Table In database
