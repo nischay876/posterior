@@ -1,7 +1,7 @@
 # Frontend Web App Posterior
 
 ## Preview
-[![Watch the video](https://i.sstatic.net/Vp2cE.png)](./preview.mp4)
+[Watch the video](https://streamable.com/njy1to)
 
 This README provides an overview and instructions for a frontend web application that incorporates various features including register, login, Discord authentication, Cloudflare Turnstile, password login/magic link, and the ability to upload images through the web. It also includes an image and video manager.
 
